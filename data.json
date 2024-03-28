@@ -3,7 +3,7 @@
   "status":200,
 
   "data":{
-    "test":"exit",
+    "test":"print('thanhtung')",
     "name_file":"TDS[V4.0].py",
     "ADS":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/ADS",
     "link_web":"https://www.jusst.x10.bz/",
