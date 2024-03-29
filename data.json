@@ -2,10 +2,10 @@
   "status":200,
   "messager":"Weclome Tool Jusst",
   "support":"gan_link vao day",
-  
+
   "script":{
     "status_sp":404,
-    "linktool_new":" ",
+    "linktool_new":"",
     "name_file":"TDS[V4.0].py"
   },
   "data":{
@@ -17,6 +17,7 @@
   },
   "ADS":{
     "exec_ADS":"",
+    
     "link_open":"",
     "link_ADS":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/ADS"
   }
