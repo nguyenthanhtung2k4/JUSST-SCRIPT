@@ -1,14 +1,24 @@
 {
-  "messager":"Weclome Tool Jusst",
   "status":200,
-
+  "messager":"Weclome Tool Jusst",
+  "support":"gan_link vao day",
+  
+  "script":{
+    "status_sp":404,
+    "linktool_new":" ",
+    "name_file":"TDS[V4.0].py"
+  },
   "data":{
     "test":"print('thanhtung')",
-    "name_file":"TDS[V4.0].py",
-    "ADS":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/ADS",
     "link_web":"https://www.jusst.x10.bz/",
     "link_keyvip":"https://www.jusst.x10.bz/",
     "link_24h":"https://www.jusst.x10.bz/",
     "link_logo":"https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/LOGO"
+  },
+  "ADS":{
+    "exec_ADS":"",
+    "link_open":"",
+    "link_ADS":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/ADS"
   }
+  
 }
