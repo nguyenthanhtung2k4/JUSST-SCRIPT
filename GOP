@@ -1,10 +1,10 @@
-#  UPLOAD NGAY 31/12/2023
+#  UPLOAD NGAY 30/3/2024
 #  ///////////////////// NOI DUNG UPLOAD////////////////////////////////////////////
-#  NÂNG CẤP LÊN   VISION 3.4 
+#  NÂNG CẤP LÊN   VISION 4.0
 # ###################### Có thêm Tool  GOlike (Tikotk-tym vs follow)
+# ###################### Có thêm Tool  GOlike (ig)
 # ###################### Nôi dung thêm  phần Xem kênh youtube
-# ###################### 
-# ###################### 
+
 from colorama import Fore,Style,Back
 import re , os, sys,requests
 from time import*
