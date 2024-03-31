@@ -5,16 +5,17 @@
   
   "script":{
     "version":"V4.0",
-    "linktool_new":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/LOGO",
+    "linktool_new":"https://github.com/nguyenthanhtung2k4 [nguyenthanhtung2k4] x/JUSST-SCRIPT/raw/main/LOGO",
     "name_file":"TOOL_JUSST.py",
     "youtube":""
   },
   "data":{
-    "test":"print('thanhtung')",
     "name_logo":".logo.txt",
     "link_logo":"https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/LOGO",
+    
     "name_gop":".gop.txt",
     "link_gop":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/GOP",
+
     "link_web":"https://www.jusst.x10.bz/",
     "key_vip":"https://www.jusst.x10.bz/",
     "key24h":"123"
