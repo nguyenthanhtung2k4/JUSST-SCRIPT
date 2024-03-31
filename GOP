@@ -113,7 +113,6 @@ HIỆN ĐÃ NGỪNG HOẠT ĐỘNG MONG BẠN CHỌN TOOL KHÁC
 
 THANK YOU!
               ''')
-     
     if lua_chon ==2:
         print(f'Tool TDS Profile{vang}[TOKEN]') 
         System.Clear();
