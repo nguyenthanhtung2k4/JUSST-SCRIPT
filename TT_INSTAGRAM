@@ -1,0 +1,387 @@
+#  VISION  GOLIKE 2.1(UPLOAD BO QUA JOB  CMT vs CHECK MANG)
+import requests
+from colorama import Fore, Style
+import json
+import random
+import re
+import os, sys
+import platform
+from time import sleep
+from pystyle import System
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time, json
+import requests
+
+# Color codes
+do = Fore.RED
+xanh_lam = Fore.GREEN
+vang = Fore.YELLOW
+xn = Fore.BLUE
+tim = Fore.MAGENTA
+blue = Fore.CYAN
+trang = Fore.WHITE
+nenden = "\033[40m"
+nendo = "\033[41m"
+nenxanhla = "\033[42m"
+nencam = "\033[43m"
+nenxanhduong = "\033[44m"
+nentim = "\033[45m"
+nenxanhduongnhat = "\033[46m"
+s = Style.RESET_ALL
+######################## CHECK MANG###########################
+def check_mang():
+     re=requests.get('https://www.youtube.com/@HoangSonTungJusst',timeout=5)
+     if re.status_code==200:
+          return
+     else:
+          print(vang,"Vui Long Ket  noi  mang")
+          print(do,":((")
+          exit(); 
+############################################### THUAT TOAN DRIVER###############################################
+# KHỞI TẠO  OPTION
+option=webdriver.ChromeOptions()
+# Tắt thông báo chorme
+option.add_argument('--disable-notifications')
+# Hiện thị Chrome  cho  đế khi  tắt bằng tay
+option.add_experimental_option( "detach", True)
+# Khởi tạo trình duyệt Chrome
+driver = webdriver.Chrome(options=option)
+
+def driver_cookies(cookie_str, driver):
+    # Kiểm tra đầu vào
+    if not isinstance(cookie_str, str):
+        raise ValueError(do,"Cookie must be a string")
+    
+    # Loại bỏ khoảng trắng và chia chuỗi cookie thành các cặp key-value
+    cookies = cookie_str.replace(' ', '').split(';')
+    driver.get('https://www.instagram.com/')
+    cookie_dict = {}
+    for cookie in cookies:
+        try:
+            cookie_data = cookie.split('=')
+            cookie_dict[cookie_data[0]] = cookie_data[1]
+        except IndexError:
+            # Bỏ qua các cookie không hợp lệ
+            continue
+    
+    # Thêm từng cookie vào trình duyệt
+    for key, value in cookie_dict.items():
+         driver.add_cookie({'name': key, 'value': value, 'domain': 'www.instagram.com'})  # Thêm 'path' để đảm bảo cookie được áp dụng cho tất cả các URL
+def driver_run(driver,link,type):
+    try:
+        if type=='follow':
+            try:
+                # chx follow
+                driver.get(link)
+                sleep(5)
+                driver.find_element(By.XPATH,'/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/section/main/div/header/section/div[1]/div[2]/div/div[1]/button').click()
+                # driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+                driver.refresh()
+            except:
+                #  da foloww
+                print(do,'Acc Instagram Erorr')
+        elif type=='like':
+            try:
+                # chx like
+                driver.get(link)
+                time.sleep(5)
+                driver.find_element(By.XPATH,'/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div[2]/section/main/div/div[1]/div/div[2]/div/div[3]/div[1]/div[1]/span[1]/div/div').click()
+                # driver.refresh()
+            except:
+                #  da like
+                print(do,'Acc Instagram Erorr')
+        else:
+            print(do,'Type: no  like or follow')
+        
+    except:
+        print(do,'Acc Instagram không tồn tại!')
+def driver_antiblock(driver,time):
+    time=time
+    driver.get('https://www.instagram.com/reels/')
+    sleep(60)
+        
+         
+############################################### THUAT TOAN GOLIKE###############################################
+def get_instagram(au):
+    he_instagram = {
+        'authority': 'gateway.golike.net',
+        'Accept-Language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+        'Authorization': au,
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://app.golike.net',
+    }
+    try:
+        re_golike = requests.get('https://gateway.golike.net/api/users/me', headers=he_instagram).json()
+        if re_golike['status'] != 200:
+            print(f'{do}[!] Error: Invalid token')
+            System.Clear()
+            exit();
+        else:
+            print("ID:", re_golike['data']['id'])
+            print("USER NAME:", re_golike['data']['username'])
+            print("EMAIL:", re_golike['data']['email'])
+            print(f'{vang}$$$:', re_golike['data']['coin'], " đồng")
+    except Exception as e:
+        print(f'{do}Error fetching user information:', str(e))
+
+def job_instagram(au, id_instagram, delay,driver):
+    he_instagram ={
+          "Accept-Language": "vi,en;q=0.9,vi-VN;q=08,en-US;q=0.7",
+          "Authorization": au,
+          "Content-Type": "application/json;charset=utf-8",
+          "Origin": "https://app.golike.net",
+          "Referer": "https://app.golike.net/",
+          "T": "VFZSamVFMVVTVFZOZW1kM1QxRTlQUT09"
+}
+    try:
+        data_job = {'account_id': id_instagram}
+        
+        re_job = requests.get(f'https://gateway.golike.net/api/advertising/publishers/instagram/jobs?instagram_account_id={id_instagram}&data=null', headers=he_instagram, data=data_job).json()    
+        if re_job!=200:
+             if re_job['message']=='Hi\u1ec7n t\u1ea1i ch\u01b0a c\u00f3 jobs m\u1edbi, quay l\u1ea1i sau 30p nh\u00e9 !':
+                  for x in range(100,-1,-1):
+                    #    print(re_job['message'])
+                       print('Delay-Job: ',x,end=' \r')
+                       sleep(1)
+        job_type = re_job['data']['type']
+        link= re_job['data']['link']
+        id_job = re_job['data']['id']
+        object_id = re_job['data']['object_id']
+        print(f'ID: {id_job} | {job_type.capitalize()}')
+        data_bao_cao = {'instagram_users_advertising_id': id_job, 'instagram_account_id': id_instagram, 'async': 'true'}
+        data_skip = {'ads_id': id_job, 'object_id': object_id, 'account_id': id_instagram, 'type': job_type}
+        if job_type not in ['follow', 'like']:
+            print(f'{do}Unsupported job type: {job_type}')
+            sleep(1)
+            print(f'{xanh_lam}Đang chuyển job khác')
+            sleep(1)
+            re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/instagram/skip-jobs', json=data_skip, headers=he_instagram).json()
+            print(re_skip['message']) 
+            return
+        sleep(3)
+        # Check HE THONG
+        if platform.system() == "Android" or platform.system() == "Linux":
+          #   os.system(f'xdg-open {link}')
+               print('Android')
+        elif platform.system() == "Windows":
+               print('System-Window')
+               driver_run(driver,link,job_type)
+               
+        else:
+            print(f'{do}Hệ điều hành của bạn vẫn chưa được hỗ trợ\nLiên hệ ngay với Admin nhé!\n')
+            exit();
+        for x in range(delay, -1, -1):
+            print("Delay: ", x, end=' \r')
+            sleep(1)
+        sleep(2)
+        re_bao_cao = requests.post('https://gateway.golike.net/api/advertising/publishers/instagram/complete-jobs', headers=he_instagram, json=data_bao_cao).json()
+        if re_bao_cao['status'] == 400:
+          #   print(re_bao_cao['message'])
+          #   if(re_bao_cao['message']=='Hi\u1ec7n t\u1ea1i ch\u01b0a c\u00f3 jobs m\u1edbi, quay l\u1ea1i sau 30p nh\u00e9 !'):
+                 for x in range(100,-1,-1):
+                       print(re_bao_cao['message'])
+                       print('Delay-Job: ',x,end=' \r')
+                       sleep(1)
+                 re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/instagram/skip-jobs', json=data_skip, headers=he_instagram).json()
+                 print(re_skip['message'])
+        elif re_bao_cao['status'] == 200:
+             coins=re_bao_cao["data"]["prices"]
+             time=re_bao_cao['data']['updated_at']
+             time=time[-8:]
+             print(f'{trang}{time}|{vang}SUCCESS +{coins} đ')
+        else:
+            print(f'{do}Error: {re_bao_cao.get("message", "Unknown error")}')
+            print(f'{xanh_lam}Đang chuyển job khác')
+            sleep(1)
+            re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/instagram/skip-jobs', json=data_skip, headers=he_instagram).json()
+            print(re_skip['message'])  
+    except Exception as e:
+        print(f'{do}Error processing Instagram job:', str(e))      
+
+# ######################################## XU  LY FILE ##############################################################
+def check_file_exist(file_path):
+         return os.path.exists(file_path)
+
+#  NAME  CAC FILE
+file_au = 'authorization.txt'
+file_cookies='cookies_ig.txt'
+file_acc = 'acc_instagram.txt'
+check_file_au = check_file_exist(file_au)
+check_file_au = check_file_exist(file_cookies)
+check_file_acc = check_file_exist(file_acc)
+
+def read_file(file_path): # DOC FILE
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+        return content
+    except Exception as e:
+        print(f'{do}Error reading file {file_path}:', str(e))
+        return None
+
+def write_file(file_path, data):# VIET FILE
+    try:
+        with open(file_path, 'w+') as file:
+            file.write(data)
+    except Exception as e:
+        print(f'{do}Error writing to file {file_path}:', str(e))
+def acc_instagram(au):
+        # au="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9nYXRld2F5LmdvbGlrZS5uZXRcL2FwaVwvbG9naW4iLCJpYXQiOjE3MDM0NzcxNjUsImV4cCI6MTczNTAxMzE2NSwibmJmIjoxNzAzNDc3MTY1LCJqdGkiOiJUMEZkOTBSUmZlV2RoQW16Iiwic3ViIjoyMDUyMjU0LCJwcnYiOiJiOTEyNzk5NzhmMTFhYTdiYzU2NzA0ODdmZmYwMWUyMjgyNTNmZTQ4In0.dL6XV_a-TcnSFRFDgyetcmBmbq4DMBF41_JkpVnbR8Y"
+        #user="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        he_instagram ={
+          "Accept-Language": "vi,en;q=0.9,vi-VN;q=08,en-US;q=0.7",
+          "Authorization": au,
+          "Content-Type": "application/json;charset=utf-8",
+          "Origin": "https://app.golike.net",
+          "Referer": "https://app.golike.net/",
+          "T": "VFZSamVFMVVTVFZOZW1kM1QxRTlQUT09"
+}
+        check_mang();
+        re=requests.get('https://gateway.golike.net/api/instagram-account', headers=he_instagram).json()
+        id=[entry['id']for entry in re['data']]
+        name=[entry2['instagram_username']for entry2 in re['data']]
+        print(f'\n{tim}All  Account-Instagram')
+        for x in  range (len(id)):
+                print(f'{vang}Nhap[{x+1}]')
+                print(f'{vang}ID: {id[x]}{trang}| Name: {name[x]}')
+def instagram(au,  id_instagram):
+        he_instagram = {
+                'authority': 'gateway.golike.net',
+                'Accept-Language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+                'Authorization': au,
+                'T':'VFZSamQwMTZWVFZOUkUxNVRrRTlQUT09',
+                'Content-Type': 'application/json;charset=utf-8',
+                'Origin': 'https://app.golike.net',
+        }
+        check_mang();
+        re=requests.get('https://gateway.golike.net/api/instagram-account', headers=he_instagram).json()
+        id=[entry['id']for entry in re['data']]
+        name=[entry2['instagram_username']for entry2 in re['data']]
+        print(f'\n{tim}Account-Instagram')
+        so=id_instagram-1
+        print(f'ID chay la: {id[so]}|{name[so]}')
+        write_file(file_acc,str(id[so]))
+if not (check_file_au  and check_file_acc):
+    check_mang();
+    au = input(f'{do}Nhap Authorization: ')
+    write_file(file_au, au)
+    print(f'{trang}====================================')
+    acc_instagram(au)
+    id_instagram = int(input(f'{xanh_lam}Nhap Lua Chon ID-Instagram: '))
+    instagram(au,id_instagram)
+    cookies=input(vang,'Nhập Cookie-Instagram:\n',trang)
+    write_file(file_cookies,cookies)
+else:
+    print(s)
+    System.Clear()
+    check_mang();
+    chon = input("[Y/N] Nhap lai Authorization\n>> ").upper()
+    if chon == 'Y':
+        au = input(f'{do}Nhap Authorization: ')
+        write_file(file_au, au)
+    doc_user = read_file(file_acc)
+    print("\nID Instagram Hien tai la:", doc_user)
+    chon2 = input("\n\n[Y/N] Nhap lai id_instagram\n>> ").upper()
+    if chon2 == 'Y':
+        print("===========ACC Instagram KHAC===========")
+        acc_instagram(au)
+        id_instagram = input(f'{xanh_lam}Nhap Lua Chon ID-Instagram: ')
+        instagram(au,id_instagram)
+        cookies = input(f'{do}Nhap Cookie-Instagram: ')
+        write_file(file_cookies, cookies)
+
+# DOC DU LIEU FILE
+read_au = read_file(file_au)
+read_acc = read_file(file_acc)
+read_cookies = read_file(file_cookies)
+while(True):
+     try:
+          nhiem_vu = int(input(f'Nhap so job: '))
+          break;
+     except :
+          print('Nhap khong hop le(Nhap  lai)'.upper())
+          nhiem_vu = int(input(f'Nhap so job: '))
+     try:
+         anti_job=int(input("Nhập số JOB DELAY"))
+         anti_time=int(input("Nhập số Time-Anti"))
+         break;
+     except:
+          print('Nhap khong hop le(Nhap  lai)'.upper())
+          anti_job=int(input("Nhập số JOB DELAY"))
+          anti_time=int(input("Nhập số Time-Anti"))
+        #   anti_time=int(input("Nhập số Time"))
+
+################################################################### RUN NHIEM VU
+while True:
+    print(s)
+    System.Clear()
+    chon = int(input("[1]Delay co dinh\n[2]Delay random\n>> "))
+    if chon == 1:
+        System.Clear()
+        while True:
+            try:
+                delay = int(input("Nhap Delay co dinh\n>> "))
+                break;
+            except:
+                print("Vui lòng nhập là số (vd: 10)")
+                delay = int(input("Nhap Delay co dinh\n>> "))
+        # chay toool DELAY CO DINH
+        System.Clear()
+        print('\n\n')
+        get_instagram(read_au)
+        print('\n')
+        for i in range(nhiem_vu):
+            if i==anti_job:
+                driver_antiblock(driver,anti_time)
+            else:
+                print(do,'so khong hop le!')
+                break;
+            print("Job ", i + 1)
+            #   RUN NHIEM VU
+            driver_cookies(read_cookies,driver)
+            job_instagram(read_au, read_acc, delay)
+        break;
+    elif chon == 2:
+        System.Clear()
+        while True:
+            try:
+                delay_input = input("Nhap Dalay random(vd:10-20)\n>> ")
+                xu_ly = re.match(r'(\d+)-(\d+)', delay_input)
+                break;
+            except:
+                print("Vui lòng nhập không dấu cách (vd:20-30)")
+                delay_input = input("Nhap Dalay random(vd:10-20)\n>> ")
+                xu_ly = re.match(r'(\d+)-(\d+)', delay_input)   
+        # chay toool DELAY RANDOM
+        System.Clear()
+        print('\n\n')
+        get_instagram(read_au)
+        print('\n')
+        for i in range(nhiem_vu):
+            if i==anti_job:
+                driver_antiblock(driver,anti_time)
+            else:
+                print("Job ", i + 1)
+                if xu_ly:
+                    so1, so2 = map(int, xu_ly.groups())
+                    ran = random.randint(so1, so2)
+                    delay = ran
+                else:
+                    print(f'{do}So khong hop le'.upper())
+                    break;
+            #  RUN NHIEM VU
+                driver_cookies(read_cookies,driver)
+                job_instagram(read_au, read_acc, delay)  
+        break;
+# au="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9nYXRld2F5LmdvbGlrZS5uZXRcL2FwaVwvbG9naW4iLCJpYXQiOjE3MDgxNTc1NTYsImV4cCI6MTczOTY5MzU1NiwibmJmIjoxNzA4MTU3NTU2LCJqdGkiOiI5T2dzdk5sYUgxdDYzWTZRIiwic3ViIjoyMDUyMjU0LCJwcnYiOiJiOTEyNzk5NzhmMTFhYTdiYzU2NzA0ODdmZmYwMWUyMjgyNTNmZTQ4In0.0RcelszwQMmGpWFxyy4MrmcNv97ZJl-WoQBWlzl205o"
+# acc_instagram(au)
+# cookies='mid=Zf8ZFAALAAGffleooqRuq9iSveIR; fbm_124024574287414=base_domain=.instagram.com; ig_did=4D18E6B4-03B3-4926-A80B-800B7EEB8AD4; datr=FBn_ZaKZR9Q_PtOiUaBJaB7a; ig_nrcb=1; ps_n=0; ps_l=0; shbid="4493\05448613185905\0541742752934:01f734a439eb33173d37be23b03ba06769df885eb08d22d3b3a163df9f7c16e592c9cd3b"; shbts="1711216934\05448613185905\0541742752934:01f7fc648ff6a63086cd8a9ac22ffb60cc1445f8eb3d2cf94fa2a5b41f61d8debd97e0a2"; csrftoken=h0d3IrcjWegVAsF8ZpNoZJW4SS2dxMl6; ds_user_id=65822400174; dpr=2; fbsr_124024574287414=jfEMT3KZfLpTywX3LZu6xMe5yOyP4le2hGAlyJ2kN0Q.eyJ1c2VyX2lkIjoiMTAwMDE5MDA5Mzg0OTkwIiwiY29kZSI6IkFRQnQwMW1mLUJCV1Fiajhob25DWDJXUE04bmdqcjhjZVlhOEtLZ3VoUEZjY3NIWENPUUhIb2lFbklBQWdQbkk2MHdaSHFLRmtoNERvS1pPQ3pyX2hDc0tpZnNCbjlfUGlSeEl6Z2ZoSmpiMTQ4VEYwMGVyRUdxcEtIN0pxcURyVWtPMEFzRlJrV3pQdnNhNDZtenpDR3d1Nmw2eUZoM2xCcnJsNW9iOGgzeXRnWVVXdUktamMtNjdXNmNVRWV5VkxzV0docWxVVktNOWZ1NUFjakd6ZHpIYVJlM2lTdE5OaGFFV01yQ25VNkVXQmZ6blNPVHJNRldjb2ZmcElfXzBpZ0tUZEI0UDhCa2JheVVRY3o2U0x1aUFXQ2Z2SERyT2dZWFpZZXBJRUZRSjl3OHZVeGZyX1Y5ZXhSTGRrbktPRnYxbkJYbEdyRndzdFk5VGxtRGhtdGtvV3BhQmw1THptTHBCdm4yUjBnNHFCdyIsIm9hdXRoX3Rva2VuIjoiRUFBQnd6TGl4bmpZQk83bHV0WkJHNzNaQjZaQjdZWkJ3dG9aQ3cyMEMwRlJDTDB5S1NWdGlmdkdaQkZTdU9pMGE1eEU3WEM0Ym5YbEtkYXc3RDFvYmRLa0JwdHRBaUJ6SGdVOGxaQlpCZHBEeG9CY2xZMHJIYWZYWVE4ZVI3bjF3elBqQTdDVFVyMnBIYU1BRjVhTXpJT2g0R25MNXNna1pBcHdvN1M0VzdnMGFOQnZ5QUI3WFFCSmpraXRONEJBWkRaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNzExMjk3OTI0fQ; fbsr_124024574287414=w71y6WNhE0bV5j6YkDQfajnGrcUE4_gSgdxIgduMxhw.eyJ1c2VyX2lkIjoiMTAwMDE5MDA5Mzg0OTkwIiwiY29kZSI6IkFRQ21SZlA2Y0UzUllxS2UtYWVkc0J4ZC04VlJmdHh5MHdDYldPc0FHZEtVc29ieUFzWE9Ibl9KTlFEX3RrRGszREdEdmE4TUl0akJGWjRSUXk2MHRQSERKaFBPemZBRlJZNHNtTzBNLUIzWXhZQklodVZEQnI5bzFoNERkeEFKcmowM2JPY29pTkxvaUZVRDYtalp0ZTFXTEU2ZWlQSFVwSGo3MS12VTBOakU0Vk9ST21aVm5HOWc3cUp5b1ltaGU4MVl6YkV6aWFXdjc0QTN0TS1DWXhGZDExSlZNVzk5ekxHWEhXN3JxZXVPQXV3dldkVzhpYW1SX3FLSkFhU05YRFZuYlpiYWRLQkhUSVJOamF0dDZzR0MyZlphSmZ5Q19GYjhIRXVKRmlTQ1ZHUkxnQUF6Wm01QVRVNTBLdC1jSXJsNFhDcDZBYUQwQlJOTmlMNl90UFFyay1ycVU0WlpXQTUwM1lJdzgtWjJ3USIsIm9hdXRoX3Rva2VuIjoiRUFBQnd6TGl4bmpZQk8zdXVEdUtVcGxpMXlBUHlXeFhOa2xpd2lkRDhBc3FLdGFZWkNqVFdVSXBrSWlMakFKdHRYOXZGQkVsaUQ0azB2b1kyRm5CSHE3OVlOWkJvaWtWbFRDOURpcGlaQktVeUdObVRDUDNYSHFnZ1c5aXVwaVpCVGZhYnoyN1ZGWW1UWkJhbnJXWkM5MVJIODVsYVBaQUNQanVaQUM4V1c4Z01hWVF2elpCYmhmaklCek10UVQ0bldOUjJGRm9JWkQiLCJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImlzc3VlZF9hdCI6MTcxMTI5ODgzMX0; sessionid=65822400174%3AVrjQRWmVk8JYGB%3A11%3AAYckFX9tN0JdDJWiOSMkknw0LrXU8KlRSXJ7IgL5ZA; rur="EAG\05465822400174\0541742834861:01f7fdfcd2b3a9991bc78a845344176d36943001828c86b2fe422381ad78b6d5969c1efa"'
+# delay=23
+# antiblock=
+# id_instagram='655214'
+# sleep(3)
+# driver_cookies(cookies,driver)
+# job_instagram(au, id_instagram, delay,driver)
