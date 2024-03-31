@@ -1,10 +1,10 @@
-#  UPLOAD NGAY 30/3/2024
+#  UPLOAD NGAY 31/3/2024
 #  ///////////////////// NOI DUNG UPLOAD////////////////////////////////////////////
-#  NÂNG CẤP LÊN   VISION 4.0
+#  NÂNG CẤP LÊN   VISION 4.1
 # ###################### Có thêm Tool  GOlike (Tikotk-tym vs follow)
 # ###################### Có thêm Tool  GOlike (ig)
 # ###################### Nôi dung thêm  phần Xem kênh youtube
-
+# ###################### Có thêm phần quản lý data  bằng git sẽ quản lý một cách dễ dàng hơn!
 from colorama import Fore,Style,Back
 import re , os, sys,requests
 from time import*
@@ -37,18 +37,18 @@ def read_exec(file_path): # DOC FILE
         print(f'{do}Error reading file {file_path}:', str(e))
         return None
 ###########################
-TDS_Token="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_PROFILE_TOKEN"
+TDS_Token="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_PROFILE_TOKEN"
 ### upload  file toool fb new 10/10/2023
-TDS_FB_NEW='https://raw.githubusercontent.com/nguyenthanhtung2k4/AMDIN_JUSST/main/TT_TDS_FB%5BV3%5D'
-TDS_FB_CU="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_FB_CA_NHAN_CU"
-TDS_TIKTOK="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_TIKTOK_THUONG"
-TDS_TIKTOK_NOW="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_TIKTOK_NOW"
+TDS_FB_NEW='https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_NEW'
+TDS_FB_CU="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_CA_NHAN_CU"
+TDS_TIKTOK="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_TIKTOK_THUONG"
+TDS_TIKTOK_NOW="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_TIKTOK_NOW"
 ### TINH NANG IG  LOAI BO  url6="https://run.mocky.io/v3/68a1f442-594b-4062-b475-e9f1016858a1"
-GOLIKE_TIKTOK="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_GOLIKE.py"### them tinh nang 
-GOLIKE_INSTAGRAM=""
+GOLIKE_TIKTOK="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_GOLIKE-TIKTOK"### them tinh nang 
+GOLIKE_INSTAGRAM="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_GOLIKE_INSTAGRAM"
 # upload  tinh ngan  tiktok  view 
 # LUA CHON  THU 8
-VIEW_TIKTOK="https://raw.githubusercontent.com/nguyenthanhtung2k4/AMDIN_JUSST/main/TT_VIEW_TIKTOK"
+VIEW_TIKTOK="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_VIEW_TIKTOK"
 ###########################
 
 
