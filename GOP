@@ -1,10 +1,10 @@
-#  UPLOAD NGAY 30/3/2024
+#  UPLOAD NGAY 31/12/2023
 #  ///////////////////// NOI DUNG UPLOAD////////////////////////////////////////////
-#  NÂNG CẤP LÊN   VISION 4.0
+#  NÂNG CẤP LÊN   VISION 3.4 
 # ###################### Có thêm Tool  GOlike (Tikotk-tym vs follow)
-# ###################### Có thêm Tool  GOlike (ig)
 # ###################### Nôi dung thêm  phần Xem kênh youtube
-
+# ###################### 
+# ###################### 
 from colorama import Fore,Style,Back
 import re , os, sys,requests
 from time import*
@@ -28,21 +28,15 @@ den=Fore.BLACK
 ngang=f'{do}=>'
 System.Clear()
 ###########################
-def read_exec(file_path): # DOC FILE
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            content = file.read()
-        return content
-    except Exception as e:
-        print(f'{do}Error reading file {file_path}:', str(e))
-        return None
-###########################
-url1="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_PROFILE_TOKEN"
+
+url_logo="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/LOGO"
+url1="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_FROFILE_TK_MK"
+url2="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_PROFILE_TOKEN"
 ### upload  file toool fb new 10/10/2023
-url2='https://raw.githubusercontent.com/nguyenthanhtung2k4/AMDIN_JUSST/main/TT_TDS_FB%5BV3%5D'
-url3="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_FB_CA_NHAN_CU"
-url4="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_TIKTOK_THUONG"
-url5="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_TIKTOK_NOW"
+url3='https://raw.githubusercontent.com/nguyenthanhtung2k4/AMDIN_JUSST/main/TT_TDS_FB%5BV3%5D'
+url4="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_FB_CA_NHAN_CU"
+url5="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_TIKTOK_THUONG"
+url6="https://github.com/nguyenthanhtung2k4/AMDIN_JUSST/raw/main/TT_TDS_TIKTOK_NOW"
 ### TINH NANG IG  LOAI BO  url6="https://run.mocky.io/v3/68a1f442-594b-4062-b475-e9f1016858a1"
 
 # upload  tinh ngan  tiktok  view 
@@ -73,24 +67,25 @@ def download(link_file,name):
                 exit();
 
 ################################################
+exec(requests.get(url=url_logo).text)
 tds=(f'''{trang}╔═════════════════════╗
 ║{vang}  Tool Trao Đổi Sub  {trang}║    
 ╚═════════════════════╝      
-{ngang} {xanh_lam}Nhập Số {vang}[1] {xanh_lam}Tool TDS Profile{vang}[TOKEN]
+{ngang} {xanh_lam}Nhập Số {vang}[1] {xanh_lam}Tool TDS Profile{vang}[TK-MK]
+{ngang} {xanh_lam}Nhập Số {vang}[2] {xanh_lam}Tool TDS Profile{vang}[TOKEN]
 ----------------------------------------------
-{ngang} {xanh_lam}Nhập Số {vang}[2] {xanh_lam}Tool {do}Upload{xanh_lam} TDS FB_New{vang}[v3]
-{ngang} {xanh_lam}Nhập Số {vang}[3] {xanh_lam}Tool Phien Ban Cu TDS FB{vang}[v2]
+{ngang} {xanh_lam}Nhập Số {vang}[3] {xanh_lam}Tool {do}Upload{xanh_lam} TDS FB_New{vang}[v3]
+{ngang} {xanh_lam}Nhập Số {vang}[4] {xanh_lam}Tool Phien Ban Cu TDS FB{vang}[v2]
 ----------------------------------------------
-{ngang} {xanh_lam}Nhập Số {vang}[4] {xanh_lam}Tool TDS Tiktok{vang}[V0]
-{ngang} {xanh_lam}Nhập Số {vang}[5] {xanh_lam}Tool TDS {vang}Now-TIKTOK{vang}[V1]
+{ngang} {xanh_lam}Nhập Số {vang}[5] {xanh_lam}Tool TDS Tiktok{vang}[V0]
+{ngang} {xanh_lam}Nhập Số {vang}[6] {xanh_lam}Tool TDS {vang}Now-TIKTOK{vang}[V1]
 
 {trang}╔═══════════════════════════════╗
 ║{vang}     Tool {tim}GOLIKE{trang} VS TIKTOK{trang}     ║    
 ╚═══════════════════════════════╝ 
 
-{ngang} {xanh_lam}Nhập Số {vang}[6] {xanh_lam}Tool GOLIKE-TikTok{do} [New]
-{ngang} {xanh_lam}Nhập Số {vang}[7] {xanh_lam}Tool GOLIKE-Insagram{do} [New]
-{ngang} {xanh_lam}Nhập Số {vang}[8] {xanh_lam}Tool TikTok-View
+{ngang} {xanh_lam}Nhập Số {vang}[7] {xanh_lam}Tool GOLIKE{do} [New]
+{ngang} {xanh_lam}Nhập Số {vang}[8] {xanh_lam}Tool TikTok
 
 {trang}╔══════════════════════╗
 ║{vang}     Tool - JUSST{trang}     ║    
@@ -107,14 +102,47 @@ print(tds)
 
 lua_chon=int(input(f'{vang}=>{trang}Nhập Số Chạy :')) 
 ################################################
-try:     
-    if lua_chon ==1 :
-        print('')
-        System.Clear()
-        # logo
-        read_exec('.logo.txt')
-        exec(requests.get(url=).text)
-        
+try:
+    if lua_chon==1:
+        System.Clear();
+        print(f'Tool TDS Profile{vang}[TK-MK]')
+        exec(requests.get(url=url_logo).text)
+        print('''
+TOOL TDS-PROFILE TK-MK 
+HIỆN ĐÃ NGỪNG HOẠT ĐỘNG MONG BẠN CHỌN TOOL KHÁC
+
+THANK YOU!
+              ''')
+     
+    if lua_chon ==2:
+        print(f'Tool TDS Profile{vang}[TOKEN]') 
+        System.Clear();
+        exec(requests.get(url=url_logo).text)
+        exec(requests.get(url=url2).text)
+        ## auto  tds fb 
+    if lua_chon==4:
+        print(f'Tool Auto TDS FB{vang}[v2]')
+        System.Clear();
+        exec(requests.get(url=url_logo).text)
+        exec(requests.get(url=url4).text)
+        ## toool  tds tiktok thuong
+    if lua_chon==5:
+        print(f'Tool TDS Tiktok{vang}[V0]')
+        System.Clear();
+        exec(requests.get(url=url_logo).text)
+        exec(requests.get(url=url5).text)
+        ### toool  tds now
+    if lua_chon==6:
+        print(f'Tool TDS {do}Now-TIKTOK{vang}[V1]')
+        System.Clear();
+        exec(requests.get(url=url_logo).text)
+        exec(requests.get(url=url6).text)
+     #### upload  tds fb 
+    if lua_chon==3:
+        print('Tool Upload New TDS-FB[V3]')
+        System.Clear();
+        exec(requests.get(url=url_logo).text)
+        exec(requests.get(url=url3).text)
     if lua_chon==8:
             #  tiktok view
           print('Tool TikTok-View')
@@ -145,13 +173,25 @@ try:
                    download(link_file3,name3)
           ########################33 VAO TOOL TIKTOK VIEW 
           System.Clear()
-          read_exec('.logo.txt')
+          exec(requests.get(url=url_logo).text)
           exec(requests.get(url=url_view_tiktok_8).text)
+    if lua_chon==7:
+            #   golike
+          print("Tool Golike [new]")
+          System.Clear();
+          exec(requests.get(url=url_logo).text)
+          exec(requests.get(url=url_golike_7).text)
+
     if lua_chon==9:
           System.Clear();
           print('UPLOAD')
-          read_exec('.logo.txt')
+          exec(requests.get(url=url_logo).text)
           exit();
+        #exec(requests.get(url=url7).text)
+    #else: 
+     #   System.Clear()
+     #   exec(requests.get(url=url_logo).text)
+     #   print('Vui lòng chạy lại')    
 except:
     System.Clear();
     print(f'Chạy  lại {do}:((')
