@@ -5,7 +5,7 @@
   
   "script":{
     "version":"V4.0",
-    "linktool_new":"https://github.com/nguyenthanhtung2k4 [nguyenthanhtung2k4] x/JUSST-SCRIPT/raw/main/LOGO",
+    "linktool_new":"https://github.com/nguyenthanhtung2k4",
     "name_file":"TOOL_JUSST.py",
     "youtube":""
   },
@@ -23,8 +23,7 @@
   "ADS":{
     "exec_ADS":"",
     
-    "link_open":"",
-    "link_ADS":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/ADS"
+    "link_open":""
   }
   
 }
