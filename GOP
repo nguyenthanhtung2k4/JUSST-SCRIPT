@@ -198,4 +198,3 @@ except:
     print("Chạy lại không được liên hệ Admin ")
     print(f'{blue}Liên hệ: {do}https://support-jusst.000webhostapp.com/{trang}')
     exit;
-# THAH TUNG
