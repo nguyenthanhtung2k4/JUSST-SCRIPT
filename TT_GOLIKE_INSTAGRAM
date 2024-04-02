@@ -42,13 +42,22 @@ def check_mang():
           exit(); 
 ############################################### THUAT TOAN DRIVER###############################################
 # KHỞI TẠO  OPTION
-option=webdriver.ChromeOptions()
-# Tắt thông báo chorme
-option.add_argument('--disable-notifications')
-# Hiện thị Chrome  cho  đế khi  tắt bằng tay
-option.add_experimental_option( "detach", True)
-# Khởi tạo trình duyệt Chrome
-driver = webdriver.Chrome(options=option)
+# option=webdriver.ChromeOptions()
+# # Tắt thông báo chorme
+# option.add_argument('--disable-notifications')
+# # Hiện thị Chrome  cho  đế khi  tắt bằng tay
+# option.add_experimental_option( "detach", True)
+# # Khởi tạo trình duyệt Chrome
+# driver = webdriver.Chrome(options=option)
+options = webdriver.ChromeOptions()
+options.add_argument("--no-sandbox")
+
+options.add_experimental_option( "detach", True)
+options.add_argument('--disable-notifications')
+
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
 
 def driver_cookies(cookie_str, driver):
     # Kiểm tra đầu vào
@@ -82,7 +91,7 @@ def driver_run(driver,link,type):
                 driver.refresh()
             except:
                 #  da foloww
-                print(do,'Acc Instagram Erorr')
+                print(do,'Instagram Erorr')
         elif type=='like':
             try:
                 # chx like
@@ -92,18 +101,25 @@ def driver_run(driver,link,type):
                 # driver.refresh()
             except:
                 #  da like
-                print(do,'Acc Instagram Erorr')
+                print(do,'Instagram Erorr')
         else:
             print(do,'Type: no  like or follow')
         
     except:
-        print(do,'Acc Instagram không tồn tại!')
+        print(do,'Instagram không tồn tại!')
 def driver_antiblock(driver,time):
-    time=time
-    driver.get('https://www.instagram.com/reels/')
-    sleep(60)
-        
-         
+    if(time>60):
+        time=time/60
+        for x in range(time,-1 -1):
+            driver.get('https://www.instagram.com/reels/')
+            for i in range(int(45),-1 ,-1 ):
+                print('DELAY-ANTI:',i,end=' \r')
+                sleep(1)
+    else:
+        driver.get('https://www.instagram.com/reels/')
+        for i in range(int(time),-1 ,-1 ):
+            print('DELAY-ANTI:',i,end=' \r')
+            sleep(1)
 ############################################### THUAT TOAN GOLIKE###############################################
 def get_instagram(au):
     he_instagram = {
@@ -121,8 +137,8 @@ def get_instagram(au):
             exit();
         else:
             print("ID:", re_golike['data']['id'])
-            print("USER NAME:", re_golike['data']['username'])
-            print("EMAIL:", re_golike['data']['email'])
+            print(xanh_lam,"USER NAME:", re_golike['data']['username'])
+            print(trang,"EMAIL:", re_golike['data']['email'])
             print(f'{vang}$$$:', re_golike['data']['coin'], " đồng")
     except Exception as e:
         print(f'{do}Error fetching user information:', str(e))
@@ -144,13 +160,13 @@ def job_instagram(au, id_instagram, delay,driver):
              if re_job['message']=='Hi\u1ec7n t\u1ea1i ch\u01b0a c\u00f3 jobs m\u1edbi, quay l\u1ea1i sau 30p nh\u00e9 !':
                   for x in range(100,-1,-1):
                     #    print(re_job['message'])
-                       print('Delay-Job: ',x,end=' \r')
+                       print('Delay-End/Job: ',x,end=' \r')
                        sleep(1)
         job_type = re_job['data']['type']
         link= re_job['data']['link']
         id_job = re_job['data']['id']
         object_id = re_job['data']['object_id']
-        print(f'ID: {id_job} | {job_type.capitalize()}')
+        print(f'{trang}ID: {id_job} | {blue}{job_type.capitalize()}')
         data_bao_cao = {'instagram_users_advertising_id': id_job, 'instagram_account_id': id_instagram, 'async': 'true'}
         data_skip = {'ads_id': id_job, 'object_id': object_id, 'account_id': id_instagram, 'type': job_type}
         if job_type not in ['follow', 'like']:
@@ -165,9 +181,11 @@ def job_instagram(au, id_instagram, delay,driver):
         # Check HE THONG
         if platform.system() == "Android" or platform.system() == "Linux":
           #   os.system(f'xdg-open {link}')
-               print('Android')
+               print(f'{nenden}{trang}Android')
+               driver_run(driver,link,job_type)
+               
         elif platform.system() == "Windows":
-               print('System-Window')
+               print(f'{nenden}{trang}System-Window')
                driver_run(driver,link,job_type)
                
         else:
@@ -183,7 +201,7 @@ def job_instagram(au, id_instagram, delay,driver):
           #   if(re_bao_cao['message']=='Hi\u1ec7n t\u1ea1i ch\u01b0a c\u00f3 jobs m\u1edbi, quay l\u1ea1i sau 30p nh\u00e9 !'):
                  for x in range(100,-1,-1):
                        print(re_bao_cao['message'])
-                       print('Delay-Job: ',x,end=' \r')
+                       print('Delay-End/Job: ',x,end=' \r')
                        sleep(1)
                  re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/instagram/skip-jobs', json=data_skip, headers=he_instagram).json()
                  print(re_skip['message'])
@@ -272,7 +290,7 @@ if not (check_file_au  and check_file_acc):
     acc_instagram(au)
     id_instagram = int(input(f'{xanh_lam}Nhap Lua Chon ID-Instagram: '))
     instagram(au,id_instagram)
-    cookies=input(vang,'Nhập Cookie-Instagram:\n',trang)
+    cookies=input(vang+'Nhập Cookie-Instagram:\n'+trang)
     write_file(file_cookies,cookies)
 else:
     print(s)
@@ -300,20 +318,15 @@ read_cookies = read_file(file_cookies)
 while(True):
      try:
           nhiem_vu = int(input(f'Nhap so job: '))
+          anti_job=int(input("Nhập ANTI-JOB\n==>"))
+          anti_time=int(input("Nhập số DELAY-JOB\n==>"))
           break;
      except :
           print('Nhap khong hop le(Nhap  lai)'.upper())
           nhiem_vu = int(input(f'Nhap so job: '))
-     try:
-         anti_job=int(input("Nhập số JOB DELAY"))
-         anti_time=int(input("Nhập số Time-Anti"))
-         break;
-     except:
           print('Nhap khong hop le(Nhap  lai)'.upper())
-          anti_job=int(input("Nhập số JOB DELAY"))
-          anti_time=int(input("Nhập số Time-Anti"))
-        #   anti_time=int(input("Nhập số Time"))
-
+          anti_job=int(input("Nhập số ANTI-JOB"))
+          anti_time=int(input("Nhập số DELAY-JOB"))
 ################################################################### RUN NHIEM VU
 while True:
     print(s)
@@ -336,13 +349,11 @@ while True:
         for i in range(nhiem_vu):
             if i==anti_job:
                 driver_antiblock(driver,anti_time)
-            else:
-                print(do,'so khong hop le!')
-                break;
-            print("Job ", i + 1)
-            #   RUN NHIEM VU
+                anti_job+=i
+            print(tim+"Job ", i + 1)
+            #  RUN NHIEM VU
             driver_cookies(read_cookies,driver)
-            job_instagram(read_au, read_acc, delay)
+            job_instagram(read_au, read_acc, delay,driver)
         break;
     elif chon == 2:
         System.Clear()
@@ -363,8 +374,9 @@ while True:
         for i in range(nhiem_vu):
             if i==anti_job:
                 driver_antiblock(driver,anti_time)
+                anti_job+=i
             else:
-                print("Job ", i + 1)
+                print(tim+"Job ", i + 1)
                 if xu_ly:
                     so1, so2 = map(int, xu_ly.groups())
                     ran = random.randint(so1, so2)
@@ -374,7 +386,7 @@ while True:
                     break;
             #  RUN NHIEM VU
                 driver_cookies(read_cookies,driver)
-                job_instagram(read_au, read_acc, delay)  
+                job_instagram(read_au, read_acc, delay,driver)  
         break;
 # au="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9nYXRld2F5LmdvbGlrZS5uZXRcL2FwaVwvbG9naW4iLCJpYXQiOjE3MDgxNTc1NTYsImV4cCI6MTczOTY5MzU1NiwibmJmIjoxNzA4MTU3NTU2LCJqdGkiOiI5T2dzdk5sYUgxdDYzWTZRIiwic3ViIjoyMDUyMjU0LCJwcnYiOiJiOTEyNzk5NzhmMTFhYTdiYzU2NzA0ODdmZmYwMWUyMjgyNTNmZTQ4In0.0RcelszwQMmGpWFxyy4MrmcNv97ZJl-WoQBWlzl205o"
 # acc_instagram(au)

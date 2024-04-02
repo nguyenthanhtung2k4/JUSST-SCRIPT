@@ -89,7 +89,7 @@ tds=(f'''{trang}╔════════════════════�
 ║{vang}     Tool {tim}GOLIKE{trang} VS TIKTOK{trang}     ║    
 ╚═══════════════════════════════╝ 
 
-{ngang} {xanh_lam}Nhập Số {vang}[6] {xanh_lam}Tool GOLIKE-TikTok{do} [New]
+{ngang} {xanh_lam}Nhập Số {vang}[6] {xanh_lam}Tool GOLIKE-TikTok{do} [HOT]
 {ngang} {xanh_lam}Nhập Số {vang}[7] {xanh_lam}Tool GOLIKE-Insagram{do} [New]
 {ngang} {xanh_lam}Nhập Số {vang}[8] {xanh_lam}Tool TikTok-View
 
