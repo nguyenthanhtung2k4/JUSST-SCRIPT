@@ -217,7 +217,7 @@ else:
     chon2 = input("\n[Y/N] Nhap lai ID_Tiktok\n>> ").upper()
     if chon2 == 'Y':
         id_tiktok = input(f'{xanh_lam}Nhap Lua Chon ID-TikTok: ')
-        write_file(file_acc, id_tiktok)
+        tiktok(au,id_tiktok)
 
 # DOC DU LIEU FILE
 read_au = read_file(file_au)
