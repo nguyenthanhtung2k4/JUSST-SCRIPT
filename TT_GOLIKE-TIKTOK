@@ -58,7 +58,9 @@ def get_tiktok(au):
     except Exception as e:
         print(f'{do}Error fetching user information:', str(e))
 
-def job_tiktok(au, id_tiktok, delay):
+def  job_tiktok(au, id_tiktok, delay):
+    # print('thanhtung')
+    url=f'https://gateway.golike.net/api/advertising/publishers/tiktok/jobs?account_id={id_tiktok}&data=null'
     he_golike = {
         'authority': 'gateway.golike.net',
         'Accept-Language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
@@ -66,72 +68,62 @@ def job_tiktok(au, id_tiktok, delay):
         'Content-Type': 'application/json;charset=utf-8',
         'Origin': 'https://app.golike.net',   
     }
+    re=requests.get(url=url,headers=he_golike)
     try:
-        data_job = {'account_id': id_tiktok}
-        re_job = requests.get(f'https://gateway.golike.net/api/advertising/publishers/tiktok/jobs?account_id={id_tiktok}&data=null', headers=he_golike, data=data_job).json()
-        message=re_job['data']['message']
-        if re_job['status'] != 200:
-            print(f'{do}Error: Invalid account ID')
-            print(f"{do}{message}")
-            exit();
-                 
-        if 'data' not in re_job or 'type' not in re_job['data']:
-            print(f'{do}Unexpected response format. Check API compatibility.')
-            return
-        job_type = re_job['data']['type']
-        link = re_job['data']['link']
-        id_job = re_job['data']['id']
-        object_id = re_job['data']['object_id']
-        print(f'ID: {id_job} | {job_type.capitalize()}')
-        data_bao_cao = {'ads_id': id_job, 'account_id': id_tiktok, 'async': 'true'}
-        data_skip = {'ads_id': id_job, 'object_id': object_id, 'account_id': id_tiktok, 'type': job_type}
-        if job_type not in ['follow', 'like']:
-            print(f'{do}Unsupported job type: {job_type}')
-            sleep(1)
-            print(f'{xanh_lam}Đang chuyển job khác')
-            sleep(1)
-            re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
-            print(re_skip['message']) 
-            return
-        sleep(3)
-        # Check HE THONG
-        if platform.system() == "Android" or platform.system() == "Linux":
-            os.system(f'xdg-open {link}')
-        elif platform.system() == "Windows":
-            os.system(f'cmd /c start {link}')
-        else:
-            print(f'{do}Hệ điều hành của bạn vẫn chưa được hỗ trợ\nLiên hệ ngay với Admin nhé!\n')
-            exit();
-        for x in range(delay, -1, -1):
-            print("Delay: ", x, end=' \r')
-            sleep(1)
-        sleep(2)
-        re_bao_cao = requests.post('https://dev.golike.net/api/advertising/publishers/tiktok/complete-jobs', headers=he_golike, json=data_bao_cao).json()
-
-        if 'status' not in re_bao_cao:
-            print(f'{do}Unexpected response format. Check API compatibility.')
-            return
-
-        if re_bao_cao['status'] == 400:
-            print(re_bao_cao['message'])
-
-            if 'message' in re_bao_cao and 'not enough coin' in re_bao_cao['message'].lower():
-                print(f'{do}Not enough coins. Skipping job.')
+            re_job=re.json()
+            job_type = re_job['data']['type']
+            link = re_job['data']['link']
+            id_job = re_job['data']['id']
+            object_id = re_job['data']['object_id']
+            print(f'{trang}ID: {id_job} | {vang}{job_type.capitalize()}')
+            data_bao_cao = {'ads_id': id_job, 'account_id': id_tiktok, 'async': 'true'}
+            data_skip = {'ads_id': id_job, 'object_id': object_id, 'account_id': id_tiktok, 'type': job_type}
+            #  not like follow
+            if job_type not in ['follow', 'like']:
+                print(f'{do}Unsupported job type: {job_type}')
+                sleep(1)
+                print(f'{xanh_lam}Đang chuyển job khác')
+                sleep(1)
+                re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
+                print(re_skip['message']) 
                 return
-
-            sleep(4)
-            re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
-            print(re_skip['message'])
-        elif re_bao_cao['status'] == 200:
-            print(f'{vang}SUCCESS +{re_bao_cao["data"]["prices"]} đ')
-        else:
-            print(f'{do}Error: {re_bao_cao.get("message", "Unknown error")}')
-            print(f'{xanh_lam}Đang chuyển job khác')
-            sleep(1)
-            re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
-            print(re_skip['message'])  
-    except Exception as e:
-        print(f'{do}Error processing TikTok job:', str(e))      
+            sleep(3)
+            # Check HE THONG
+            if platform.system() == "Android" or platform.system() == "Linux":
+                os.system(f'xdg-open {link}')
+            elif platform.system() == "Windows":
+                os.system(f'cmd /c start {link}')
+            else:
+                print(f'{do}Hệ điều hành của bạn vẫn chưa được hỗ trợ\nLiên hệ ngay với Admin nhé!\n')
+                exit();
+            for x in range(delay, -1, -1):
+                print("Delay: ", x, end=' \r')
+                sleep(1)
+            sleep(2)
+            re_bao_cao = requests.post('https://dev.golike.net/api/advertising/publishers/tiktok/complete-jobs', headers=he_golike, json=data_bao_cao).json()
+            if re_bao_cao['status']==200:
+                print(f'{vang}SUCCESS +{re_bao_cao["data"]["prices"]} đ')
+            elif re_bao_cao['status']==400:
+                print(re_bao_cao['message'])
+                if 'message' in re_bao_cao and 'not enough coin' in re_bao_cao['message'].lower():
+                    print(f'{do}Not enough coins. Skipping job.')
+                    return
+                else:
+                    print(f'{do}Error: Baocao')
+                sleep(4)
+                re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
+                print(re_skip['message'])
+            else:
+                print(f'{do}Error: {re_bao_cao.get("message", "Unknown error")}')
+                print(f'{xanh_lam}Đang chuyển job khác')
+                sleep(1)
+                re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
+                print(re_skip['message'])       
+    except:
+            # print('Có một số lỗi ở phần reJob')
+            # print('Liên hệ Admin')
+            print(f'{do}Error: {re.status_code}')
+            print(f'{do}ReJob error->else')    
 # ######################################## XU  LY FILE ##############################################################
 def check_file_exist(file_path):
          return os.path.exists(file_path)
@@ -249,11 +241,11 @@ while True:
     elif chon == 2:
         System.Clear()
         try:
-            delay_input = input("Nhap Dalay random(vd:10-20)\n>> ")
+            delay_input =input("Nhap Dalay random(vd:10-20)\n>> ")
             xu_ly = re.match(r'(\d+)-(\d+)', delay_input)
         except:
             print("Vui lòng nhập không dấu cách (vd:20-30)")
-            delay_input = input("Nhap Dalay random(vd:10-20)\n>> ")
+            delay_input =input("Nhap Dalay random(vd:10-20)\n>> ")
             xu_ly = re.match(r'(\d+)-(\d+)', delay_input)
         # chay toool DELAY RANDOM
         System.Clear()
@@ -265,9 +257,10 @@ while True:
             if xu_ly:
                 so1, so2 = map(int, xu_ly.groups())
                 ran = random.randint(so1, so2)
-                delay = ran
+                delay =int(ran)
             else:
                 print(f'{do}So khong hop le'.upper())
                 break
           #  RUN NHIEM VU
-            job_tiktok(read_au, read_acc, delay)  
+            job_tiktok(read_au, read_acc, delay)
+            # tung
