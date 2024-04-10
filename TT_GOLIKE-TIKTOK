@@ -195,17 +195,17 @@ def tiktok(au,  id_tiktok):
         write_file(file_acc,str(id[so]))
 if not (check_file_au  and check_file_acc):
     check_mang();
-    au = input(f'{do}Nhap Authorization: ')
+    au = input(f'{do}Nhập Authorization: ')
     write_file(file_au, au)
     print(f'{trang}====================================')
     acc_tiktok(au)
-    id_tiktok = int(input(f'{xanh_lam}Nhap Lua Chon ID-TikTok: '))
+    id_tiktok = int(input(f'{xanh_lam}Lựa Chọn ID-TikTok: '))
     tiktok(au,id_tiktok)
 else:
     print(s)
     System.Clear()
     check_mang();
-    chon = input("[Y/N] Nhap lai Authorization\n>> ").upper()
+    chon = input("[Y/N] Nhập lại Authorization\n>> ").upper()
     if chon == 'Y':
         au = input(f'{do}Nhap Authorization: ')
         write_file(file_au, au)
@@ -214,9 +214,9 @@ else:
     print("===========ACC TIKTOK KHAC===========")
     au=read_file(file_au)
     acc_tiktok(au)
-    chon2 = input("\n[Y/N] Nhap lai ID_Tiktok\n>> ").upper()
+    chon2 = input("\n[Y/N] Chọn ID-Tiktok\n>> ").upper()
     if chon2 == 'Y':
-        id_tiktok = input(f'{xanh_lam}Nhap Lua Chon ID-TikTok: ')
+        id_tiktok = input(f'{xanh_lam}Lựa Chọn lại ID-TikTok: ')
         tiktok(au,id_tiktok)
 
 # DOC DU LIEU FILE
