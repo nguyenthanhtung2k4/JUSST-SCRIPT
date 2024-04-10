@@ -69,12 +69,12 @@ def job_tiktok(au, id_tiktok, delay):
     try:
         data_job = {'account_id': id_tiktok}
         re_job = requests.get(f'https://gateway.golike.net/api/advertising/publishers/tiktok/jobs?account_id={id_tiktok}&data=null', headers=he_golike, data=data_job).json()
-
+        message=re_job['data']['message']
         if re_job['status'] != 200:
             print(f'{do}Error: Invalid account ID')
-            print("Vui  long nhap lai Authorization")
-            return
-
+            print(f"{do}{message}")
+            exit();
+                 
         if 'data' not in re_job or 'type' not in re_job['data']:
             print(f'{do}Unexpected response format. Check API compatibility.')
             return
@@ -131,7 +131,7 @@ def job_tiktok(au, id_tiktok, delay):
             re_skip = requests.post('https://gateway.golike.net/api/advertising/publishers/tiktok/skip-jobs', json=data_skip, headers=he_golike).json()
             print(re_skip['message'])  
     except Exception as e:
-        print(f'{do}Error processing TikTok job:', str(e))
+        print(f'{do}Error processing TikTok job:', str(e))      
 # ######################################## XU  LY FILE ##############################################################
 def check_file_exist(file_path):
          return os.path.exists(file_path)
@@ -185,15 +185,14 @@ def tiktok(au,  id_tiktok):
                 'Content-Type': 'application/json;charset=utf-8',
                 'Origin': 'https://app.golike.net',
         }
-        check_mang();
         re=requests.get('https://gateway.golike.net/api/tiktok-account', headers=he_golike).json()
         id=[entry['id']for entry in re['data']]
         name=[entry2['nickname']for entry2 in re['data']]
         print(f'\n{tim}Account-TikTok')
         so=id_tiktok-1
-        print(f'ID chay la: {id[so]}|{name[so]}')
+        print(f'ID chạy là: {id[so]}|{name[so]}')
         write_file(file_acc,str(id[so]))
-if not (check_file_au  and check_file_acc):
+if not (check_file_au  or check_file_acc):
     check_mang();
     au = input(f'{do}Nhập Authorization: ')
     write_file(file_au, au)
@@ -205,7 +204,7 @@ else:
     print(s)
     System.Clear()
     check_mang();
-    chon = input("[Y/N] Nhập lại Authorization\n>> ").upper()
+    chon = input("[Y/N]Nhập lại Authorization\n>> ").upper()
     if chon == 'Y':
         au = input(f'{do}Nhap Authorization: ')
         write_file(file_au, au)
@@ -214,9 +213,9 @@ else:
     print("===========ACC TIKTOK KHAC===========")
     au=read_file(file_au)
     acc_tiktok(au)
-    chon2 = input("\n[Y/N] Chọn ID-Tiktok\n>> ").upper()
+    chon2 = input("\n[Y/N]Nhập lại ID_Tiktok\n>> ").upper()
     if chon2 == 'Y':
-        id_tiktok = input(f'{xanh_lam}Lựa Chọn lại ID-TikTok: ')
+        id_tiktok = int(input(f'{xanh_lam}Lựa Chọn ID-TikTok: '))
         tiktok(au,id_tiktok)
 
 # DOC DU LIEU FILE
