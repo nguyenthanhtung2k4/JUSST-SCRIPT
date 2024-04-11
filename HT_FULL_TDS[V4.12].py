@@ -1,13 +1,38 @@
-import requests
-import json ,os ,sys,socket,base64,subprocess
-try:
-    import requests ,socket
-    from pystyle import Colors, Colorate, Write, Center, Add, Box
-    import pystyle
-except:
-	os.system("pip install requests")
-	os.system("pip install pystyle")
+#  upload 11/4/2024 [V4.12]
+# ///////////////// Cập nhập lại lỗi không cài đặt được thư viện của nó.
+import os, sys, platform,subprocess
+# Tên của tập tin Python hiện tại
+current_file = sys.argv[0]
+# Lấy tên của tập tin Python từ đường dẫn tuyệt đối
+file_name = os.path.basename(current_file)
+#  cai thu vien:
+def install_library(library):
+    try:
+        __import__(library)
+    except ImportError:
+        if platform.system() == "Windows":
+            print(f"\nĐang cài đặt\nNhấn y để cài đặt thư viện\n '{library}'...")
+            os.system(f"pip install {library}")
+        elif platform.system() == "Darwin" and "ISH" in platform.uname().release:
+            print(f"\nĐang cài đặt\nNhấn y để cài đặt thư viện\n '{library}'...")
+            os.system(f"apk add  {library}")
+        elif platform.system() == "Linux":
+            try:
+                print(f"\nĐang cài đặt\nNhấn y để cài đặt thư viện\n '{library}'...")
+                subprocess.run(['termux-setup-storage'])
+                os.system(f"termux-fix-shebang {os.path.dirname(sys.executable)}")
+                os.system(f"pip install {library}")
+            except:
+                print(f"\nĐang cài đặt\nNhấn y để cài đặt thư viện\n '{library}'...")
+                os.system(f"pip install {library}")
+# Cài đặt thư viện nếu chưa có
+libraries = ["requests", "pystyle", "colorama", "bs4"]
 
+for library in libraries:
+    install_library(library)
+# /////////////////////////////////////////////////////////////////////////// khai bao thu vien python
+import requests
+import json ,os ,sys,socket,base64
 from time import strftime,sleep
 from pystyle import System,Colors
 from colorama import Fore, Style
@@ -30,31 +55,6 @@ nentim = "\033[45m"
 nenxanhduongnhat = "\033[46m"
 s = Style.RESET_ALL
 
-# Tên của tập tin Python hiện tại
-current_file = sys.argv[0]
-# Lấy tên của tập tin Python từ đường dẫn tuyệt đối
-file_name = os.path.basename(current_file)
-#  cai thu vien:
-def install_library(library):
-    try:
-        __import__(library)
-    except ImportError:
-        if platform.system() == "Windows":
-            print(f"Đang cài đặt '{library}'...")
-            os.system(f"pip install {library}")
-        elif platform.system() == "Darwin" and "ISH" in platform.uname().release:
-            print(f"Đang cài đặt '{library}'...")
-            os.system(f"apk add  {library}")
-        elif platform.system() == "Linux":
-            try:
-                print(f"Đang cài đặt '{library}'...")
-                subprocess.run(['termux-setup-storage'])
-                os.system(f"termux-fix-shebang {os.path.dirname(sys.executable)}")
-                os.system(f"pip install {library}")
-            except:
-                print(f"Đang cài đặt '{library}'...")
-                os.system(f"pip install {library}")
-                
 #LIEN QUAN DEN FILE
 def download(link,name):
      link=requests.get(link)
@@ -159,8 +159,8 @@ key_24=int(time+ip+40)
 key24 =f'{ip_name}{key_24}2024'
 # print(key24)
 url = f'https://www.jusst.x10.bz/key24h/key.html?key='+key24
-token_web1s = '21e1caff-91e1-4585-89ea-80d7ba07b945'
-web1s = requests.get(f'https://web1s.com/api?token={token_web1s}&url={url}').json()
+token_web1s = 'f4b25077-98f1-48e2-bfa4-49d36088074a'
+web1s = requests.get(f'https://web1s.com/api?token={token_web1s}&url={url}&alias=key_tool').json()
 if web1s['status']=="error": 
         print(web1s['message'])
         quit()
@@ -180,12 +180,7 @@ def key_vip(key):
         # print(re['message'])
         return key
 #//////////////////////////////////////////////////////           MAIN              ////////////////////////////////////////////
-# Cài đặt thư viện nếu chưa có
-libraries = ["requests", "pystyle", "colorama", "bs4"]
 
-for library in libraries:
-    install_library(library)
-# //////////////////////////
 status();
 #CHECK  logo vs gop_tool
 if not check_file_exist('.logo.txt') : #[V4.1]
@@ -238,4 +233,4 @@ else:
 #  run tool gop V4.1
 System.Clear()
 exec(read_exec('.logo.txt'))
-exec(requests.get('https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/GOP_EDIT.py').text)
+exec(requests.get('https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/GOP_EDIT.py').text)# tung
