@@ -39,7 +39,7 @@ def read_exec(file_path): # DOC FILE
 ###########################
 TDS_Token="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_PROFILE_TOKEN"
 ### upload  file toool fb new 10/10/2023
-TDS_Da_Luong_FB=''
+TDS_Da_Luong_FB='https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_DA_LUONG_FB'
 TDS_FB='https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_NEW'
 TDS_FB_CU="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_CA_NHAN_CU"
 TDS_TIKTOK="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_TIKTOK_THUONG"
