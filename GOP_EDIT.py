@@ -39,7 +39,8 @@ def read_exec(file_path): # DOC FILE
 ###########################
 TDS_Token="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_PROFILE_TOKEN"
 ### upload  file toool fb new 10/10/2023
-TDS_FB_NEW='https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_NEW'
+TDS_Da_Luong_FB=''
+TDS_FB='https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_NEW'
 TDS_FB_CU="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_FB_CA_NHAN_CU"
 TDS_TIKTOK="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_TIKTOK_THUONG"
 TDS_TIKTOK_NOW="https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/TT_main/TT_TDS_TIKTOK_NOW"
@@ -79,7 +80,8 @@ tds=(f'''{trang}╔════════════════════�
 ╚═════════════════════╝      
 {ngang} {xanh_lam}Nhập Số {vang}[1] {xanh_lam}Tool TDS Profile{vang}[TOKEN]
 ----------------------------------------------
-{ngang} {xanh_lam}Nhập Số {vang}[2] {xanh_lam}Tool {do}Upload{xanh_lam} TDS FB_New{vang}[v3]
+{ngang} {xanh_lam}Nhập Số {vang}[2] {xanh_lam}Tool {do}Upload{xanh_lam} TDS_DA_LUỒNG_FB{vang}[v3]
+{ngang} {xanh_lam}Nhập Số {vang}[02] {xanh_lam}Tool {do}Upload{xanh_lam} TDS FB{vang}[v3]
 {ngang} {xanh_lam}Nhập Số {vang}[3] {xanh_lam}Tool Phien Ban Cu TDS FB{vang}[v2]
 ----------------------------------------------
 {ngang} {xanh_lam}Nhập Số {vang}[4] {xanh_lam}Tool TDS Tiktok{vang}[V0]
@@ -115,12 +117,18 @@ try:
         # logo
         read_exec('.logo.txt')
         exec(requests.get(url=TDS_Token).text)
-    if lua_chon ==2 :
+    if lua_chon ==0.2 :
         print('')
         System.Clear()
         # logo
         read_exec('.logo.txt')
-        exec(requests.get(url=TDS_FB_NEW).text)
+        exec(requests.get(url=TDS_FB).text)
+    if(lua_chon== 2):
+        print('')
+        System.Clear()
+        # logo
+        read_exec('.logo.txt')
+        exec(requests.get(url=TDS_Da_Luong_FB).text)
     if lua_chon ==3 :
         print('')
         System.Clear()
