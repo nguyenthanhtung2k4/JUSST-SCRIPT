@@ -81,7 +81,7 @@ tds=(f'''{trang}╔════════════════════�
 {ngang} {xanh_lam}Nhập Số {vang}[1] {xanh_lam}Tool TDS Profile{vang}[TOKEN]
 ----------------------------------------------
 {ngang} {xanh_lam}Nhập Số {vang}[2] {xanh_lam}Tool {do}Upload{xanh_lam} TDS_DA_LUỒNG_FB{vang}[v3]
-{ngang} {xanh_lam}Nhập Số {vang}[02] {xanh_lam}Tool {do}Upload{xanh_lam} TDS FB{vang}[v3]
+{ngang} {xanh_lam}Nhập Số {vang}[0.2] {xanh_lam}Tool {do}Upload{xanh_lam} TDS FB{vang}[v3]
 {ngang} {xanh_lam}Nhập Số {vang}[3] {xanh_lam}Tool Phien Ban Cu TDS FB{vang}[v2]
 ----------------------------------------------
 {ngang} {xanh_lam}Nhập Số {vang}[4] {xanh_lam}Tool TDS Tiktok{vang}[V0]
