@@ -1,0 +1,29 @@
+{
+  "status":404,
+  "messager":"Weclome Tool Jusst",
+  "support":"gan_link vao day",
+  
+  "script":{
+    "version":"V4.1",
+    "linktool_new":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/FULL_TDS%5BV4.1%5D",
+    "name_file":"TOOL_JUSST.py",
+    "youtube":""
+  },
+  "data":{
+    "name_logo":".logo.txt",
+    "link_logo":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/LOGO",
+    
+    "name_gop":".gop.txt",
+    "link_gop":"https://github.com/nguyenthanhtung2k4/JUSST-SCRIPT/raw/main/GOP",
+
+    "link_web":"https://www.jusst.x10.bz/",
+    "key_vip":"https://www.jusst.x10.bz/",
+    "key24h":"123"
+  },
+  "ADS":{
+    "exec_ADS":"print('Hiện tại chúng tôi đang FIX một số lỗi \n Nếu có vấn đề xin liên lạc qua: \n Gmail: justsmoke2k4master@gmail.com')"
+    
+    "link_open":""
+  }
+  
+}
