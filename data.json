@@ -21,7 +21,7 @@
     "key24h":"123"
   },
   "ADS":{
-    "exec_ADS":"print('Hiện tại chúng tôi đang FIX một số lỗi \n Nếu có vấn đề xin liên lạc qua: \n Gmail: justsmoke2k4master@gmail.com')",
+    "exec_ADS":"print('Hiện tại chúng tôi đang FIX một số lỗi')",
     
     "link_open":""
   }
