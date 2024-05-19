@@ -1,4 +1,6 @@
-#  VISION  GOLIKE 2.1(UPLOAD BO QUA JOB  CMT vs CHECK MANG)
+#  VISION  GOLIKE 2.2(UPLOAD BO QUA JOB  CMT vs CHECK MANG)
+#  FIX loi  khong kiem tra duoc mang
+
 import requests
 from colorama import Fore, Style
 import json
@@ -27,11 +29,12 @@ nenxanhduongnhat = "\033[46m"
 s = Style.RESET_ALL
 ######################## CHECK MANG###########################
 def check_mang():
-     re=requests.get('https://www.youtube.com/@HoangSonTungJusst',timeout=5)
-     if re.status_code==200:
-          return
-     else:
-          print(vang,"Vui Long Ket  noi  mang")
+    try:
+        re=requests.get('https://www.youtube.com/')
+        if re.status_code==200:
+            return True;
+    except:
+          print(vang,"Vui Long Ket noi mang")
           print(do,":((")
           exit(); 
 ############################################### THUAT TOAN###############################################
