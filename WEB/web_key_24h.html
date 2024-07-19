@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Jusst-Key Free</title>
+<style>
+     *{
+          box-sizing:border-box;
+          padding: 0;
+          margin: 0;
+     }
+     body{
+          padding: 50px;
+          background-color: #292929;
+     }
+     .img img{
+          border-radius: 50%;
+          background-size: cover;
+          width: 200px;
+          height: 200px;
+          display: block;
+          margin: 0 auto;
+     }
+     h1  ,h2{
+          text-align: center;
+          color: antiquewhite;
+          transition: all 0.3s linear;
+     }
+     h1:hover{
+          color: rgb(180, 36, 36);
+     }
+     .Vip,.Free{
+         
+          color: white;
+          font-size: 20px;
+     }
+     .Vip p b{
+          font-size: 50px;
+          color:red; 
+          text-shadow: 3px -1px 3px #e99a0f;
+          font-weight: bold;
+     }
+     .Vip p{
+          margin-top: 150px;
+          text-align: center;
+          color:rgb(213, 194, 16);
+          text-decoration: double;
+          font-weight: bold;
+     }
+     .Vip marquee{
+          margin-top: 90px;
+          border-top: 1px solid white;
+          border-bottom: 1px solid white;
+          width: 100%;
+          padding: 10px;
+          height: auto;
+          color:white;
+     }
+     .Vip button{
+          display: block;
+          margin: 0 auto;
+          padding: 20px;
+          border-radius: 35px;
+          width: 150px;
+          font-weight: bold;
+          background-color: red;
+          color: white;
+          transition: all 0.3s linear;
+          cursor: pointer;
+     }
+     .Vip button:hover{
+          background-color: white;
+          color: red;
+          padding: 25px;
+          font-size: 25px;
+          width: 200px;
+     }
+     .Free p{
+          font-size: 20px;
+          text-align: center;
+          margin-top: 100px;
+     }
+     .Free button{
+          padding: 20px;
+          border-radius: 20px;
+          width: 70%;
+          font-weight: bold;
+          background-color: #FAEBD7;
+          color: black;
+          display: block;
+          margin: 0 auto;
+          margin-top: 10px;
+          transition: all 0.25s linear;
+     }
+     .Free button:hover{
+          padding:25px;
+          width: 80%;
+          font-size:20px;
+     }
+     .formVip{
+          display: initial;
+
+     }
+     .formVip .sdt{
+          display: flex;
+
+     }
+     .sdt img{
+          width: 60px;
+          height: 60px;
+          border-radius: 20px 0px 0px 20px;
+     }
+     .sdt{
+          cursor: pointer;
+          margin: 0 auto;
+          border-radius: 20px;
+          display: inline;
+          width: 250px;
+          height: 60px;
+          background-color: white;
+          transition: all 0.3s linear;
+     }
+     .sdt p{
+          font-weight: bold;
+          font-size: 30px;
+          justify-content: center;
+          text-align: center;
+          padding-top: 10px;
+          padding-left: 5px;
+     }
+     #muangay{
+          margin-top: 300px;
+     }
+     .sdt:hover{
+          width: 300px;
+          height: 65px;
+          
+     }
+</style>
+</head>
+<body>
+     <div class="img">
+          <a href="https://www.jusst.x10.bz/">
+          <img src="./admin.jpg" alt="img"></a>
+     </div>
+     <h1>Welcome to Key Free</h1>
+     <div class="Vip">
+          <marquee behavior="" direction="">Đăng ký mua KeyVip trong ngày hôm nay với giá vô cùng rẻ trần chờ gì nữa mà không mua</marquee>
+          <p>Mua Key Vip giá chỉ  <b>1k</b></p>
+          <button onclick="Vip()">
+               Mua ngay
+          </button>
+     </div>
+     <div class="Free">
+          <p>Copy Key_Free bên dưới 👇</p>
+          <button class="button" name="submit" onclick="copyToClipboard('#keytool')" type="submit">
+               <span id="keytool">BẠN CHƯA LẤY KEY 😒</span>
+           </button>
+     </div><br><br><br><br><br>
+     <div class="formVip" id="muangay">
+          <h2>Hãy liên hệ ngay cho ADMIN mua KeyVip</h2>
+          <div class="sdt" id="zalo">
+               <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="img">
+               <p>0985332250</p>
+          </div>
+          <br><br><div class="sdt" id="tele">
+               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFf09lwkjMeXpa7ZFAzQzDfK7qxHBCVO0dQ&s" alt="img">
+               <p style="font-size:20px; pading-top:15px;">hoangsontungjusst</p>
+          </div>
+          <!-- <br><br><div class="sdt">
+               <img src="https://t3.ftcdn.net/jpg/04/74/05/94/360_F_474059464_qldYuzxaUWEwNTtYBJ44VN89ARuFktHW.jpg" alt="img">
+               <!-- <p>0985332250</p> -->
+          </div> -->
+     </div>
+</body> 
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+     var key = GetURLParameter('key');
+     if(key != ""){
+          document.getElementById("keytool").innerHTML = key;
+     }
+  
+    function GetURLParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+        
+        return confirm('KeyFree đã Copy 👌');
+    }
+    function Vip(){
+          location.href='#muangay'
+    }
+    function muangay(){
+          var zalo=document.getElementById('zalo')
+          var tele=document.getElementById('tele')
+          zalo.addEventListener('click',function(){
+               location.href='https://zalo.me/0985332250'
+          })
+          tele.addEventListener('click',function(){
+               location.href='https://t.me/hoangsontungjusst'
+          })
+    }
+    muangay()
+</script>
