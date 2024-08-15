@@ -1,4 +1,4 @@
-#  upload 11/4/2024 [V4.12]
+#  upload 11/4/2024
 # ///////////////// Cập nhập lại lỗi không cài đặt được thư viện của nó.
 import os, sys, platform,subprocess
 # Tên của tập tin Python hiện tại
@@ -116,16 +116,29 @@ def status():
     status=requests.get(url=url_status).json()
     if  status['status'] == 200:
         print(status['messager'])
-        return
     else:
-        if status['script']['version']!='V4.1':
+        try:
+                exec(status['ADS']['exec_ADS'])
+            
+                link_ADS=status['ADS']['link_open']
+                if link_ADS=='':
+                    exit()
+                else:
+                    check_he_thong(status['ADS']['link_open'])  
+                    exit()
+        except:
+                print('Liên hệ ADMIN: https://www.jusst.x10.bz/')
+                check_he_thong('https://www.jusst.x10.bz/')
+                exit()  
+    
+    if status['script']['version']!='V4.21':
             print('Chúng tôi đang Upload File mới về')
             sleep(3)
             try:
                 print('Video Upload tool-new')
                 check_he_thong(status['script']['youtube'])
             except:
-                return
+                return  
             cd_file=sys.argv[0]
             name_file=status['script']['name_file']
             name_logo=status['data']['name_logo']
@@ -145,27 +158,24 @@ def status():
             #     print('Lỗi Download-Tool New')
             #     print('Liên hệ lại Admin')
             #     print('Mọi vấn đề liên hệ Zalo: 0985332250')
-        else:
-            # exec ADS
-            try:
-                exec(status['ADS']['exec_ADS'])
-                check_he_thong(status['ADS']['link_open'])
-            except:
-                return
-
+status();
 # key24 
 time=int(strftime("%d%m"))
 key_24=int(time+ip+40)
 key24 =f'{ip_name}{key_24}2024'
 # print(key24)
 url = f'https://www.jusst.x10.bz/key24h/key.html?key='+key24
-token_web1s = 'f4b25077-98f1-48e2-bfa4-49d36088074a'
-web1s = requests.get(f'https://web1s.com/api?token={token_web1s}&url={url}&alias=key_tool').json()
-if web1s['status']=="error": 
-        print(web1s['message'])
-        quit()
-else:
-        link24h=web1s['shortenedUrl']      
+token_mega = 'a6138fb265bf7ae7381993ca8f42b31e7155308a'
+try:
+        web1s = requests.get(f'https://megaurl.in/api?api={token_mega}&url={url}').json()
+        if web1s['status']=="error": 
+                print(web1s['message'])
+                quit()
+        else:
+                link24h=web1s['shortenedUrl']      
+except:
+    print('Hiện tại Key Đang lỗi:\nHãy liên lạc ADMIN lấy KEY nhé!\nZALO: 0985332250 \nTELEGRAM: @hoangsontung2k4')
+    exit()
 
 def key_vip(key):
      data={'key':key}
@@ -180,8 +190,8 @@ def key_vip(key):
         # print(re['message'])
         return key
 #//////////////////////////////////////////////////////           MAIN              ////////////////////////////////////////////
+status()
 
-status();
 #CHECK  logo vs gop_tool
 if not check_file_exist('.logo.txt') : #[V4.1]
     name_logo='.logo.txt'
@@ -192,6 +202,7 @@ if not check_file_exist('.logo.txt') : #[V4.1]
     download(status['data']['link_logo'],name_logo)
 #  kiem tra key  ben duoi
 else:
+    
     #  NAME  CAC FILE
     name_key='KEY_JUSST.txt'
     if not check_file_exist(name_key):
